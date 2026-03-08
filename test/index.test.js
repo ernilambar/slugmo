@@ -1,6 +1,6 @@
 'use strict';
 
-const { slugify } = require('../index.js');
+const { slugify, toTitle } = require('../index.js');
 
 const cases = [
   // Basic
@@ -65,6 +65,21 @@ const cases = [
   [undefined, ''],
 ];
 
+// toTitle: slug → Title Case
+const toTitleCases = [
+  ['hello-world-example', 'Hello World Example'],
+  ['hello_world', 'Hello World'],
+  ['foo-bar-baz', 'Foo Bar Baz'],
+  ['single', 'Single'],
+  ['a', 'A'],
+  ['', ''],
+  ['   ', ''],
+  ['hello---world', 'Hello World'],
+  ['_foo_bar_', 'Foo Bar'],
+  [null, ''],
+  [undefined, ''],
+];
+
 let failed = 0;
 for (const [input, expected] of cases) {
   const got = slugify(input);
@@ -73,7 +88,14 @@ for (const [input, expected] of cases) {
     failed++;
   }
 }
+for (const [input, expected] of toTitleCases) {
+  const got = toTitle(input);
+  if (got !== expected) {
+    console.error(`FAIL: toTitle(${JSON.stringify(input)}) => ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`);
+    failed++;
+  }
+}
 if (failed > 0) {
   process.exit(1);
 }
-console.log('All', cases.length, 'tests passed.');
+console.log('All', cases.length + toTitleCases.length, 'tests passed.');

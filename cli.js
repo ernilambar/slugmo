@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 'use strict';
 
-const { slugify } = require('./index.js');
+const { slugify, toTitle } = require('./index.js');
 
 function getInput(args) {
-  const arg = args[2];
+  const i = args.includes('--title') ? args.indexOf('--title') + 1 : 2;
+  const arg = args[i];
   if (arg !== undefined && arg !== '') {
     return arg;
   }
   return null; // caller will read stdin
+}
+
+function useTitleMode(args) {
+  return args.includes('--title');
 }
 
 function readStdin() {
@@ -28,9 +33,11 @@ async function main() {
     input = await readStdin();
   }
 
-  const slug = slugify(input);
-  if (slug !== '') {
-    process.stdout.write(slug + '\n');
+  const output = useTitleMode(process.argv)
+    ? toTitle(input ?? '')
+    : slugify(input);
+  if (output !== '') {
+    process.stdout.write(output + '\n');
   }
 }
 

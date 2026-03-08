@@ -49,4 +49,24 @@ function slugify(text) {
   return s;
 }
 
-module.exports = { slugify };
+/**
+ * Convert slug/text to Title Case.
+ * - Replace hyphens and underscores with spaces
+ * - Capitalize first letter of each word
+ *
+ * @param {string} text - Slug or text (e.g. "hello-world-example")
+ * @returns {string} Title Case string (e.g. "Hello World Example")
+ */
+function toTitle(text) {
+  if (text == null || typeof text !== 'string') {
+    return '';
+  }
+  return text
+    .replace(/[-_]+/g, ' ')
+    .split(' ')
+    .filter(Boolean)
+    .map((w) => w[0].toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
+}
+
+module.exports = { slugify, toTitle };
