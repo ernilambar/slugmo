@@ -1,7 +1,7 @@
 {
   "name": "slugmo",
   "version": "1.0.0",
-  "description": "Convert text to CMS-friendly slugs (lowercase, hyphenated, no emojis/accents)",
+  "description": "Convert text to URL-safe slugs.",
   "main": "index.js",
   "bin": {
     "slugmo": "cli.js"
@@ -20,6 +20,15 @@
     "cli"
   ],
   "license": "MIT",
+  "author": "Nilambar Sharma <nilambar@outlook.com> (https://www.nilambar.net/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernilambar/slugmo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ernilambar/slugmo/issues"
+  },
+  "homepage": "https://github.com/ernilambar/slugmo#readme",
   "engines": {
     "node": ">=22"
   }
