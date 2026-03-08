@@ -1,6 +1,6 @@
 # slugmo
 
-Convert text to URL-safe slugs that work with most CMSes (WordPress, Ghost, Drupal, etc.).
+Convert text to URL-safe slugs.
 
 ## Install
 
