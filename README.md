@@ -5,13 +5,13 @@ Convert text to URL-safe slugs.
 ## Install
 
 ```bash
-npm install slugmo
+npm install @nilambar/slugmo
 ```
 
 Or run without installing:
 
 ```bash
-npx slugmo "Your text here"
+npx @nilambar/slugmo "Your text here"
 ```
 
 ## Usage
@@ -19,17 +19,17 @@ npx slugmo "Your text here"
 **From argument:**
 
 ```bash
-npx slugmo "Hello World"
+npx @nilambar/slugmo "Hello World"
 # hello-world
 
-npx slugmo "Café résumé — 2024"
+npx @nilambar/slugmo "Café résumé — 2024"
 # cafe-resume-2024
 ```
 
 **From stdin:**
 
 ```bash
-echo "Hello World" | npx slugmo
+echo "Hello World" | npx @nilambar/slugmo
 # hello-world
 ```
 
@@ -46,7 +46,7 @@ echo "Hello World" | npx slugmo
 ## API
 
 ```js
-const { slugify } = require('slugmo');
+const { slugify } = require('@nilambar/slugmo');
 
 slugify('Hello World');        // 'hello-world'
 slugify('Café résumé');        // 'cafe-resume'

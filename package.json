@@ -1,5 +1,5 @@
 {
-  "name": "slugmo",
+  "name": "@nilambar/slugmo",
   "version": "1.0.0",
   "description": "Convert text to URL-safe slugs.",
   "main": "index.js",
