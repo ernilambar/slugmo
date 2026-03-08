@@ -1,0 +1,26 @@
+{
+  "name": "slugmo",
+  "version": "1.0.0",
+  "description": "Convert text to CMS-friendly slugs (lowercase, hyphenated, no emojis/accents)",
+  "main": "index.js",
+  "bin": {
+    "slugmo": "cli.js"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "scripts": {
+    "test": "node test/index.test.js"
+  },
+  "keywords": [
+    "slug",
+    "url",
+    "cms",
+    "cli"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  }
+}
