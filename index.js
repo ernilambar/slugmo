@@ -57,7 +57,7 @@ function slugify(text) {
  * @param {string} text - Slug or text (e.g. "hello-world-example")
  * @returns {string} Title Case string (e.g. "Hello World Example")
  */
-function toTitle(text) {
+function slugToTitleCase(text) {
   if (text == null || typeof text !== 'string') {
     return '';
   }
@@ -69,4 +69,4 @@ function toTitle(text) {
     .join(' ');
 }
 
-module.exports = { slugify, toTitle };
+module.exports = { slugify, slugToTitleCase };

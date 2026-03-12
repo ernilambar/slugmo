@@ -1,6 +1,6 @@
 {
   "name": "@nilambar/slugmo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert text to URL-safe slugs.",
   "main": "index.js",
   "bin": {
@@ -13,14 +13,15 @@
   "scripts": {
     "test": "node test/index.test.js && node test/cli.test.js"
   },
+  "dependencies": {
+    "minimist": "^1.2.8"
+  },
   "keywords": [
     "slug",
-    "url",
-    "cms",
     "cli"
   ],
-  "license": "MIT",
   "author": "Nilambar Sharma <nilambar@outlook.com> (https://www.nilambar.net/)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ernilambar/slugmo.git"
@@ -30,6 +31,6 @@
   },
   "homepage": "https://github.com/ernilambar/slugmo#readme",
   "engines": {
-    "node": ">=14"
+    "node": ">=20"
   }
 }

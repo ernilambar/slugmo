@@ -50,12 +50,15 @@ Only **Latin-based text** is supported well. Accented characters (e.g. é, ñ, �
 ## API
 
 ```js
-const { slugify } = require('@nilambar/slugmo');
+const { slugify, slugToTitleCase } = require('@nilambar/slugmo');
 
-slugify('Hello World');        // 'hello-world'
-slugify('Café résumé');        // 'cafe-resume'
-slugify('  foo   bar  ');      // 'foo-bar'
-slugify('Hello 😀 World');     // 'hello-world'
+slugify('Hello World');              // 'hello-world'
+slugify('Café résumé');              // 'cafe-resume'
+slugify('  foo   bar  ');            // 'foo-bar'
+slugify('Hello 😀 World');           // 'hello-world'
+
+slugToTitleCase('hello-world');      // 'Hello World'
+slugToTitleCase('foo_bar_baz');      // 'Foo Bar Baz'
 ```
 
 ## License

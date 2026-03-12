@@ -66,6 +66,13 @@ if (r7.stdout.trim() !== version) {
   failed++;
 }
 
+// unknown option
+const r8 = runCli(['--unknown']);
+if (r8.status === 0 || !r8.stderr.includes('Unknown option')) {
+  console.error('FAIL: node cli.js --unknown should exit non-zero and stderr should mention Unknown option');
+  failed++;
+}
+
 if (failed > 0) {
   process.exit(1);
 }
