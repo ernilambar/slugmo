@@ -11,7 +11,7 @@
     "cli.js"
   ],
   "scripts": {
-    "test": "node test/index.test.js"
+    "test": "node test/index.test.js && node test/cli.test.js"
   },
   "keywords": [
     "slug",
@@ -30,6 +30,6 @@
   },
   "homepage": "https://github.com/ernilambar/slugmo#readme",
   "engines": {
-    "node": ">=22"
+    "node": ">=14"
   }
 }

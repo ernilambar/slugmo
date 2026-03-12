@@ -33,6 +33,10 @@ echo "Hello World" | npx @nilambar/slugmo
 # hello-world
 ```
 
+## Language support
+
+Only **Latin-based text** is supported well. Accented characters (e.g. é, ñ, ü) are normalized to ASCII. Scripts that do not decompose to Latin letters (e.g. Cyrillic, CJK, Arabic) are stripped, so input in those languages will often produce empty or poor slugs. For best results, use Latin characters.
+
 ## Rules
 
 - **Lowercase** — All output is lowercase.
