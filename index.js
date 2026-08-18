@@ -1,18 +1,12 @@
 'use strict';
 
 /**
- * Emoji and symbol Unicode ranges to strip (covers common emojis, emoticons, symbols, variation selectors).
- * Code points above U+FFFF must use \u{...} with regex u flag.
- */
-const EMOJI_AND_SYMBOLS_REGEX = /[\u200D\uFE00-\uFE0F\u2600-\u26FF\u2700-\u27BF\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F1E0}-\u{1F1FF}\u{1F900}-\u{1F9FF}]/gu;
-
-/**
  * Convert text to a CMS-friendly slug.
  * - Lowercase
- * - Normalize accented characters to ASCII
- * - Remove emojis and emotion symbols
- * - Remove punctuation/symbols
- * - Replace spaces with -
+ * - Normalize to ASCII (NFKD: accents, ligatures, fullwidth, compatibility chars)
+ * - Map ß to ss
+ * - Remove punctuation/symbols (emoji included) → separator
+ * - Replace whitespace with -
  * - Collapse repeated separators
  * - Trim leading/trailing -
  *
@@ -27,17 +21,16 @@ function slugify(text) {
   let s = text.trim();
   if (s === '') return '';
 
-  // 1. Normalize accented characters: NFD then remove combining marks
-  s = s.normalize('NFD').replace(/\p{Mark}/gu, '');
+  // 1. Normalize to ASCII: NFKD decomposes accents, ligatures, fullwidth, compatibility chars
+  s = s.normalize('NFKD').replace(/\p{Mark}/gu, '');
 
-  // 2. Remove emojis and symbol ranges
-  s = s.replace(EMOJI_AND_SYMBOLS_REGEX, '');
-
-  // 3. Lowercase
+  // 2. Lowercase
   s = s.toLowerCase();
 
+  // 3. Map ß to ss (has no decomposition)
+  s = s.replace(/ß/g, 'ss');
+
   // 4. Replace non-slug chars (anything that isn't a-z, 0-9) with hyphen
-  // \p{L} would include letters but we already normalized to ASCII, so [a-z0-9] is enough
   s = s.replace(/[^a-z0-9]+/g, '-');
 
   // 5. Collapse repeated hyphens
@@ -63,7 +56,8 @@ function slugToTitleCase(text) {
   }
   return text
     .replace(/[-_]+/g, ' ')
-    .split(' ')
+    // Split on any whitespace to handle tabs/newlines and collapse runs
+    .split(/\s+/)
     .filter(Boolean)
     .map((w) => w[0].toUpperCase() + w.slice(1).toLowerCase())
     .join(' ');

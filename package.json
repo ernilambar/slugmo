@@ -1,7 +1,25 @@
 {
   "name": "@nilambar/slugmo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Convert text to URL-safe slugs.",
+  "keywords": [
+    "slug",
+    "cli"
+  ],
+  "homepage": "https://github.com/ernilambar/slugmo#readme",
+  "bugs": {
+    "url": "https://github.com/ernilambar/slugmo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernilambar/slugmo.git"
+  },
+  "license": "MIT",
+  "author": "Nilambar Sharma <nilambar@outlook.com> (https://www.nilambar.net/)",
+  "exports": {
+    ".": "./index.js",
+    "./index.js": "./index.js"
+  },
   "main": "index.js",
   "bin": {
     "slugmo": "cli.js"
@@ -13,24 +31,7 @@
   "scripts": {
     "test": "node test/index.test.js && node test/cli.test.js"
   },
-  "dependencies": {
-    "minimist": "^1.2.8"
-  },
-  "keywords": [
-    "slug",
-    "cli"
-  ],
-  "author": "Nilambar Sharma <nilambar@outlook.com> (https://www.nilambar.net/)",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ernilambar/slugmo.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ernilambar/slugmo/issues"
-  },
-  "homepage": "https://github.com/ernilambar/slugmo#readme",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }

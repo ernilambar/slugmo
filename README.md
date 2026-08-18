@@ -33,6 +33,14 @@ echo "Hello World" | npx @nilambar/slugmo
 # hello-world
 ```
 
+**Options:**
+
+```bash
+npx @nilambar/slugmo --title "hello-world"   # Hello World
+npx @nilambar/slugmo --help                  # Show help
+npx @nilambar/slugmo --version               # Show version
+```
+
 ## Language support
 
 Only **Latin-based text** is supported well. Accented characters (e.g. é, ñ, ü) are normalized to ASCII. Scripts that do not decompose to Latin letters (e.g. Cyrillic, CJK, Arabic) are stripped, so input in those languages will often produce empty or poor slugs. For best results, use Latin characters.
@@ -40,9 +48,8 @@ Only **Latin-based text** is supported well. Accented characters (e.g. é, ñ, �
 ## Rules
 
 - **Lowercase** — All output is lowercase.
-- **Normalize accented characters** — e.g. `é` → `e`, `ñ` → `n`.
-- **Remove emojis** — Emoji and emotion symbols are stripped.
-- **Remove punctuation/symbols** — Only letters, digits, and hyphens remain.
+- **Normalize to ASCII** — Accents (`é` → `e`, `ñ` → `n`), ligatures (`ﬁ` → `fi`), fullwidth (`Ａ` → `a`), and `ß` → `ss`.
+- **Remove punctuation/symbols** — Only letters, digits, and hyphens remain. Emoji and symbols become `-` (e.g. `foo😀bar` → `foo-bar`).
 - **Spaces become `-`** — Spaces and equivalent whitespace become a single hyphen.
 - **Collapse separators** — Multiple consecutive `-` become one.
 - **Trim hyphens** — No leading or trailing `-`.

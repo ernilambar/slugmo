@@ -20,10 +20,24 @@ const cases = [
   ['crème brûlée', 'creme-brulee'],
   ['Planeta Envíos', 'planeta-envios'],
 
+  // NFKD normalization (ligatures, fullwidth, compatibility)
+  ['ﬁle', 'file'],
+  ['Ａｂｃ', 'abc'],
+  ['℃test', 'ctest'],
+
+  // ß → ss
+  ['straße', 'strasse'],
+  ['STRASSE', 'strasse'],
+  ['ẞ', 'ss'],
+
   // Emojis and symbols
   ['Hello 😀 World', 'hello-world'],
   ['Hello — World 2024', 'hello-world-2024'],
   ['only-emojis-😀🎉', 'only-emojis'],
+  ['foo😀bar', 'foo-bar'],
+  ['foo⭐bar', 'foo-bar'],
+  ['hello→world', 'hello-world'],
+  ['foo⌚bar', 'foo-bar'],
   ['!!!', ''],
   ['@#$', ''],
   ['...', ''],
@@ -74,6 +88,11 @@ const toTitleCases = [
   ['a', 'A'],
   ['', ''],
   ['   ', ''],
+  ['\t', ''],
+  ['\n\n', ''],
+  ['hello\tworld', 'Hello World'],
+  ['hello \t world', 'Hello World'],
+  ['foo_\tbar', 'Foo Bar'],
   ['hello---world', 'Hello World'],
   ['_foo_bar_', 'Foo Bar'],
   [null, ''],

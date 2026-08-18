@@ -73,6 +73,20 @@ if (r8.status === 0 || !r8.stderr.includes('Unknown option')) {
   failed++;
 }
 
+// --help should override unknown option
+const r8b = runCli(['--unknown', '--help']);
+if (r8b.status !== 0 || !r8b.stdout.includes('Usage:')) {
+  console.error('FAIL: node cli.js --unknown --help should show help and exit 0');
+  failed++;
+}
+
+// -- end-of-options escape
+const r9 = runCli(['--', '--weird']);
+if (r9.stdout.trim() !== 'weird') {
+  console.error(`FAIL: node cli.js -- --weird => ${JSON.stringify(r9.stdout)}, expected "weird\\n"`);
+  failed++;
+}
+
 if (failed > 0) {
   process.exit(1);
 }
