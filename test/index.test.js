@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const { slugify, slugToTitleCase } = require('../index.js');
+const { slugify, slugToTitleCase } = require('../src/index.js')
 
 const cases = [
   // Basic
@@ -77,7 +77,7 @@ const cases = [
   // Null / non-string (edge cases for API)
   [null, ''],
   [undefined, ''],
-];
+]
 
 // slugToTitleCase: slug → Title Case
 const toTitleCases = [
@@ -97,24 +97,24 @@ const toTitleCases = [
   ['_foo_bar_', 'Foo Bar'],
   [null, ''],
   [undefined, ''],
-];
+]
 
-let failed = 0;
+let failed = 0
 for (const [input, expected] of cases) {
-  const got = slugify(input);
+  const got = slugify(input)
   if (got !== expected) {
-    console.error(`FAIL: slugify(${JSON.stringify(input)}) => ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`);
-    failed++;
+    console.error(`FAIL: slugify(${JSON.stringify(input)}) => ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`)
+    failed++
   }
 }
 for (const [input, expected] of toTitleCases) {
-  const got = slugToTitleCase(input);
+  const got = slugToTitleCase(input)
   if (got !== expected) {
-    console.error(`FAIL: slugToTitleCase(${JSON.stringify(input)}) => ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`);
-    failed++;
+    console.error(`FAIL: slugToTitleCase(${JSON.stringify(input)}) => ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`)
+    failed++
   }
 }
 if (failed > 0) {
-  process.exit(1);
+  process.exit(1)
 }
-console.log('All', cases.length + toTitleCases.length, 'tests passed.');
+console.log('All', cases.length + toTitleCases.length, 'tests passed.')

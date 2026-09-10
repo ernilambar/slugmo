@@ -17,19 +17,24 @@
   "license": "MIT",
   "author": "Nilambar Sharma <nilambar@outlook.com> (https://www.nilambar.net/)",
   "exports": {
-    ".": "./index.js",
-    "./index.js": "./index.js"
+    ".": "./src/index.js",
+    "./index.js": "./src/index.js"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "bin": {
-    "slugmo": "cli.js"
+    "slugmo": "src/cli.js"
   },
   "files": [
-    "index.js",
-    "cli.js"
+    "src"
   ],
   "scripts": {
-    "test": "node test/index.test.js && node test/cli.test.js"
+    "format": "eslint . --fix",
+    "lint": "eslint .",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "neostandard": "^0.13.0"
   },
   "engines": {
     "node": ">=22"

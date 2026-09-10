@@ -1,93 +1,93 @@
-'use strict';
+'use strict'
 
-const { spawnSync } = require('child_process');
-const path = require('path');
-const { version } = require('../package.json');
+const { spawnSync } = require('child_process')
+const path = require('path')
+const { version } = require('../package.json')
 
-const cliPath = path.join(__dirname, '..', 'cli.js');
-const node = process.execPath;
+const cliPath = path.join(__dirname, '..', 'src', 'cli.js')
+const node = process.execPath
 
-function runCli(args, stdin) {
+function runCli (args, stdin) {
   const result = spawnSync(node, [cliPath, ...args], {
     encoding: 'utf8',
     input: stdin,
-  });
-  return { stdout: result.stdout, stderr: result.stderr, status: result.status };
+  })
+  return { stdout: result.stdout, stderr: result.stderr, status: result.status }
 }
 
-let failed = 0;
+let failed = 0
 
 // node cli.js "Hello World" → hello-world
-const r1 = runCli(['Hello World']);
+const r1 = runCli(['Hello World'])
 if (r1.stdout.trim() !== 'hello-world') {
-  console.error(`FAIL: node cli.js "Hello World" => ${JSON.stringify(r1.stdout)}, expected "hello-world\\n"`);
-  failed++;
+  console.error(`FAIL: node cli.js "Hello World" => ${JSON.stringify(r1.stdout)}, expected "hello-world\\n"`)
+  failed++
 }
 
 // echo "Hello World" | node cli.js → hello-world
-const r2 = runCli([], 'Hello World\n');
+const r2 = runCli([], 'Hello World\n')
 if (r2.stdout.trim() !== 'hello-world') {
-  console.error(`FAIL: echo "Hello World" | node cli.js => ${JSON.stringify(r2.stdout)}, expected "hello-world\\n"`);
-  failed++;
+  console.error(`FAIL: echo "Hello World" | node cli.js => ${JSON.stringify(r2.stdout)}, expected "hello-world\\n"`)
+  failed++
 }
 
 // node cli.js --title "hello-world" → Hello World
-const r3 = runCli(['--title', 'hello-world']);
+const r3 = runCli(['--title', 'hello-world'])
 if (r3.stdout.trim() !== 'Hello World') {
-  console.error(`FAIL: node cli.js --title "hello-world" => ${JSON.stringify(r3.stdout)}, expected "Hello World\\n"`);
-  failed++;
+  console.error(`FAIL: node cli.js --title "hello-world" => ${JSON.stringify(r3.stdout)}, expected "Hello World\\n"`)
+  failed++
 }
 
 // --help
-const r4 = runCli(['--help']);
+const r4 = runCli(['--help'])
 if (!r4.stdout.includes('slugmo') || !r4.stdout.includes('--help')) {
-  console.error('FAIL: node cli.js --help did not show help');
-  failed++;
+  console.error('FAIL: node cli.js --help did not show help')
+  failed++
 }
 
 // -h
-const r5 = runCli(['-h']);
+const r5 = runCli(['-h'])
 if (!r5.stdout.includes('slugmo')) {
-  console.error('FAIL: node cli.js -h did not show help');
-  failed++;
+  console.error('FAIL: node cli.js -h did not show help')
+  failed++
 }
 
 // --version
-const r6 = runCli(['--version']);
+const r6 = runCli(['--version'])
 if (r6.stdout.trim() !== version) {
-  console.error(`FAIL: node cli.js --version => ${JSON.stringify(r6.stdout.trim())}, expected ${JSON.stringify(version)}`);
-  failed++;
+  console.error(`FAIL: node cli.js --version => ${JSON.stringify(r6.stdout.trim())}, expected ${JSON.stringify(version)}`)
+  failed++
 }
 
 // -v
-const r7 = runCli(['-v']);
+const r7 = runCli(['-v'])
 if (r7.stdout.trim() !== version) {
-  console.error(`FAIL: node cli.js -v => ${JSON.stringify(r7.stdout.trim())}, expected ${JSON.stringify(version)}`);
-  failed++;
+  console.error(`FAIL: node cli.js -v => ${JSON.stringify(r7.stdout.trim())}, expected ${JSON.stringify(version)}`)
+  failed++
 }
 
 // unknown option
-const r8 = runCli(['--unknown']);
+const r8 = runCli(['--unknown'])
 if (r8.status === 0 || !r8.stderr.includes('Unknown option')) {
-  console.error('FAIL: node cli.js --unknown should exit non-zero and stderr should mention Unknown option');
-  failed++;
+  console.error('FAIL: node cli.js --unknown should exit non-zero and stderr should mention Unknown option')
+  failed++
 }
 
 // --help should override unknown option
-const r8b = runCli(['--unknown', '--help']);
+const r8b = runCli(['--unknown', '--help'])
 if (r8b.status !== 0 || !r8b.stdout.includes('Usage:')) {
-  console.error('FAIL: node cli.js --unknown --help should show help and exit 0');
-  failed++;
+  console.error('FAIL: node cli.js --unknown --help should show help and exit 0')
+  failed++
 }
 
 // -- end-of-options escape
-const r9 = runCli(['--', '--weird']);
+const r9 = runCli(['--', '--weird'])
 if (r9.stdout.trim() !== 'weird') {
-  console.error(`FAIL: node cli.js -- --weird => ${JSON.stringify(r9.stdout)}, expected "weird\\n"`);
-  failed++;
+  console.error(`FAIL: node cli.js -- --weird => ${JSON.stringify(r9.stdout)}, expected "weird\\n"`)
+  failed++
 }
 
 if (failed > 0) {
-  process.exit(1);
+  process.exit(1)
 }
-console.log('All CLI integration tests passed.');
+console.log('All CLI integration tests passed.')
