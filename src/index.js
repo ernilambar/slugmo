@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * Convert text to a CMS-friendly slug.
@@ -13,33 +13,33 @@
  * @param {string} text - Input text
  * @returns {string} Slug string
  */
-function slugify(text) {
+function slugify (text) {
   if (text == null || typeof text !== 'string') {
-    return '';
+    return ''
   }
 
-  let s = text.trim();
-  if (s === '') return '';
+  let s = text.trim()
+  if (s === '') return ''
 
   // 1. Normalize to ASCII: NFKD decomposes accents, ligatures, fullwidth, compatibility chars
-  s = s.normalize('NFKD').replace(/\p{Mark}/gu, '');
+  s = s.normalize('NFKD').replace(/\p{Mark}/gu, '')
 
   // 2. Lowercase
-  s = s.toLowerCase();
+  s = s.toLowerCase()
 
   // 3. Map ß to ss (has no decomposition)
-  s = s.replace(/ß/g, 'ss');
+  s = s.replace(/ß/g, 'ss')
 
   // 4. Replace non-slug chars (anything that isn't a-z, 0-9) with hyphen
-  s = s.replace(/[^a-z0-9]+/g, '-');
+  s = s.replace(/[^a-z0-9]+/g, '-')
 
   // 5. Collapse repeated hyphens
-  s = s.replace(/-+/g, '-');
+  s = s.replace(/-+/g, '-')
 
   // 6. Trim leading/trailing hyphens
-  s = s.replace(/^-|-$/g, '');
+  s = s.replace(/^-|-$/g, '')
 
-  return s;
+  return s
 }
 
 /**
@@ -50,9 +50,9 @@ function slugify(text) {
  * @param {string} text - Slug or text (e.g. "hello-world-example")
  * @returns {string} Title Case string (e.g. "Hello World Example")
  */
-function slugToTitleCase(text) {
+function slugToTitleCase (text) {
   if (text == null || typeof text !== 'string') {
-    return '';
+    return ''
   }
   return text
     .replace(/[-_]+/g, ' ')
@@ -60,7 +60,7 @@ function slugToTitleCase(text) {
     .split(/\s+/)
     .filter(Boolean)
     .map((w) => w[0].toUpperCase() + w.slice(1).toLowerCase())
-    .join(' ');
+    .join(' ')
 }
 
-module.exports = { slugify, slugToTitleCase };
+module.exports = { slugify, slugToTitleCase }
