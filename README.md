@@ -70,4 +70,4 @@ slugToTitleCase('foo_bar_baz');      // 'Foo Bar Baz'
 
 ## License
 
-MIT
+[MIT](LICENSE)
